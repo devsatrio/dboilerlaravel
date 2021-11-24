@@ -59,7 +59,7 @@ class AdminController extends Controller
             'telp'=>$request->telp,
             'level'=>$request->level,
             'gambar'=>$finalname,
-            'password'=>Hash::make($request->password),
+            'password'=>Hash::make($request->userpassword),
         ]);
         $usr->assignRole($request->level);
         
@@ -105,7 +105,7 @@ class AdminController extends Controller
             $destination=public_path('img/admin');
             $request->file('gambar')->move($destination,$finalname);
 
-            if($request->password==''){
+            if($request->userpassword==''){
                 User::find($id)
                 ->update([
                     'name'=>$request->nama,
@@ -128,14 +128,14 @@ class AdminController extends Controller
                     'telp'=>$request->telp,
                     'level'=>$request->level,
                     'gambar'=>$finalname,
-                    'password'=>Hash::make($request->password),
+                    'password'=>Hash::make($request->userpassword),
                 ]);
 
                 $usr = User::find($id);
                 $usr->assignRole($request->level);
             }
         }else{
-            if($request->password==''){
+            if($request->userpassword==''){
                 User::find($id)
                 ->update([
                     'name'=>$request->nama,
@@ -154,7 +154,7 @@ class AdminController extends Controller
                     'email'=>$request->email,
                     'telp'=>$request->telp,
                     'level'=>$request->level,
-                    'password'=>Hash::make($request->password),
+                    'password'=>Hash::make($request->userpassword),
                 ]);
                 $usr = User::find($id);
                 $usr->assignRole($request->level);
